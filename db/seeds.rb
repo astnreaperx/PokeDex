@@ -7,12 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Pokemon.delete_all
 Quote.delete_all
+Type.delete_all
 
 quote = Quote.create(quote: "Test", author: "asd")
-Pokemon.create(name: "Bulbasaur", pokedexid: 1, hp: 100, attack: 5, defense: 5, spattack: 5, spdefense: 5, speed: 5, quote: quote)
-
-puts Pokemon.count
-puts Quote.count
 
 file = File.join(Rails.root, "db", "pokedex.json")
 data = File.read(file)
@@ -21,4 +18,27 @@ pokedex = JSON.parse(data)
 
 pokedex.each do |pokemon|
   puts pokemon["name"]["english"]
+  puts "***#{pokemon['type'].first}"
+
+  type = Type.find_or_create_by(
+    name: pokemon["type"].first
+  )
+  if type.valid?
+    pokemon = type.pokemons.create(
+      name:      pokemon["name"]["english"],
+      pokedexid: pokemon["id"],
+      hp:        pokemon["base"]["HP"],
+      attack:    pokemon["base"]["Attack"],
+      defense:   pokemon["base"]["Defense"],
+      spattack:  pokemon["base"]["Sp. Attack"],
+      spdefense: pokemon["base"]["Sp. Defense"],
+      speed:     pokemon["base"]["Speed"],
+      quote:     quote
+    )
+    puts pokemon.errors.messages
+  else
+    puts "Could not create #{pokemon['name']['english']}"
+  end
 end
+puts Pokemon.count
+puts Type.count
