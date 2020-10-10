@@ -3,5 +3,7 @@ class PokemonController < ApplicationController
     @pokemons = Pokemon.all
   end
 
-  def show; end
+  def show
+    @pokemon = Pokemon.find(params[:id])
+  end
 end

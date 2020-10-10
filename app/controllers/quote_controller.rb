@@ -3,5 +3,7 @@ class QuoteController < ApplicationController
     @quotes = Quote.all
   end
 
-  def show; end
+  def show
+    @quote = Quote.find(params[:id])
+  end
 end
