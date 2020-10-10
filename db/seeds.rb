@@ -13,3 +13,12 @@ Pokemon.create(name: "Bulbasaur", pokedexid: 1, hp: 100, attack: 5, defense: 5, 
 
 puts Pokemon.count
 puts Quote.count
+
+file = File.join(Rails.root, "db", "pokedex.json")
+data = File.read(file)
+
+pokedex = JSON.parse(data)
+
+pokedex.each do |pokemon|
+  puts pokemon["name"]["english"]
+end
