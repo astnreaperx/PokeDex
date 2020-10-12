@@ -17,10 +17,10 @@ pokedex = JSON.parse(data)
 
 pokedex.each do |pokemon|
   puts pokemon["name"]["english"]
-  puts "***#{pokemon['type'].first}"
+  puts "*** #{pokemon['type'].first}"
   quote = Quote.create(quote: Faker::Books::Dune.quote, author: Faker::Books::Dune.character)
 
-  pokemon = Pokemon.create(
+  poke = Pokemon.create(
     name:      pokemon["name"]["english"],
     pokedexid: pokemon["id"],
     hp:        pokemon["base"]["HP"],
@@ -31,6 +31,11 @@ pokedex.each do |pokemon|
     speed:     pokemon["base"]["Speed"],
     quote:     quote
   )
+
+  types = pokemon["type"]
+  types.each do |t|
+    type = Type.find_or_create_by(name: t)
+  end
 end
 puts Pokemon.count
 puts Type.count
