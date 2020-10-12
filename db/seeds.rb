@@ -16,12 +16,16 @@ file = File.join(Rails.root, "db", "pokedex.json")
 data = File.read(file)
 pokedex = JSON.parse(data)
 
-pokedex[0..9].each do |pokemon|
+pokedex.each do |pokemon|
   puts pokemon["name"]["english"]
   puts "*** #{pokemon['type'].first}"
-  quote = Quote.create(quote: Faker::Books::Dune.quote, author: Faker::Books::Dune.character)
 
-  poke = Pokemon.create(
+  authors = ["guild_navigator", "emperor", "paul", "thufir", "jessica", "irulan", "mohiam", "gurney", "leto", "stilgar", "liet_kynes", "pardot_kynes", "baron_harkonnen", "piter", "alia", "mapes", "duncan", "yueh"]
+  author = authors.sample
+  puts author
+  quote = Quote.find_or_create_by(quote: Faker::Books::Dune.quote(character: author), author: author)
+
+  poke = quote.pokemons.create(
     name:      pokemon["name"]["english"],
     pokedexid: pokemon["id"],
     hp:        pokemon["base"]["HP"],
