@@ -4,6 +4,7 @@
 <table>
  <% @pokemons.each do |poke| %>
     <tr>
+      <td><%= image_tag format('%03d', poke.pokedexid.to_s   ) + ".png" %></td>
       <td><%= poke.name %></td>
       <td><%= poke.pokedexid %></td>
       <td><%= poke.types.map(&:name).join(", ") %></td>
