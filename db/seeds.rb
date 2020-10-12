@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require "faker"
 
+PokemonType.delete_all
 Pokemon.delete_all
 Quote.delete_all
 Type.delete_all
@@ -15,7 +16,7 @@ file = File.join(Rails.root, "db", "pokedex.json")
 data = File.read(file)
 pokedex = JSON.parse(data)
 
-pokedex.each do |pokemon|
+pokedex[0..9].each do |pokemon|
   puts pokemon["name"]["english"]
   puts "*** #{pokemon['type'].first}"
   quote = Quote.create(quote: Faker::Books::Dune.quote, author: Faker::Books::Dune.character)
@@ -35,10 +36,13 @@ pokedex.each do |pokemon|
   types = pokemon["type"]
   types.each do |t|
     type = Type.find_or_create_by(name: t)
+    PokemonType.create(pokemon: poke, type: type)
+    puts type
   end
 end
 puts Pokemon.count
 puts Type.count
+puts PokemonType.count
 
 # pokedex.each do |pokemon|
 #   puts pokemon["name"]["english"]
