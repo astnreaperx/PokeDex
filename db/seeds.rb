@@ -47,6 +47,7 @@ end
 puts Pokemon.count
 puts Type.count
 puts PokemonType.count
+puts Quote.count
 
 # pokedex.each do |pokemon|
 #   puts pokemon["name"]["english"]

@@ -1,2 +1,14 @@
 <h1>Quote#show</h1>
 <p>Find me in app/views/quote/show.html.erb</p>
+
+<p>
+  <strong>Quote:</strong>
+  <%= @quote.quote %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @quote.author %>
+</p>
+
+<%= link_to 'Back', quotes_path %>
