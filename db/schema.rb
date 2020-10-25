@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_12_172200) do
+ActiveRecord::Schema.define(version: 2020_10_25_205024) do
+
+  create_table "pages", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "pokemon_types", force: :cascade do |t|
     t.integer "pokemon_id", null: false
