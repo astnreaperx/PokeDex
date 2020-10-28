@@ -12,12 +12,12 @@
 
 
   <body>
-    <section class="section">
-      <div class="container">
-        <h1 class="title is-1">Pokedex</h1>
-        <%= render partial: 'shared/menu' %>
-        <%= yield %>
-      </div>
-    </section>
+    <%= render partial: 'shared/header' %>
+    <br>
+    <%= yield %>
+    <br>
+    <%= render partial: 'shared/footer' %>
   </body>
+
+
 </html>

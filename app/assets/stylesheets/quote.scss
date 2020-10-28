@@ -1,3 +1,12 @@
 // Place all the styles related to the Quote controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.container{
+    width: 80%;
+    .card{
+        background-color: pink;
+    }
+    .card:nth-child(odd){
+        background-color: yellow;
+    }
+}

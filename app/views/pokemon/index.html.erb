@@ -1,49 +1,48 @@
-<h1>Pokemon#index</h1>
-<p>Find me in app/views/pokemon/index.html.erb</p>
+<div class="container">
+  <h1>Search</h1>
 
-<h1>Search</h1>
-<form action="/pokemon" method="GET">
-  <%= form_tag(pokemons_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
-  <%= submit_tag "search" %>
-  <% end %>
-</form>
+    <%= form_tag(pokemons_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+      <%= submit_tag "search" %>
+    <% end %>
 
-<% if @pokemons.present? %>
-  <div class="table-container">
-    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-      <tbody>
-        <th>Name</th>
-        <th>Name</th>
-        <th>pokedex Id</th>
-        <th>Type</th>
-        <th>HP</th>
-        <th>Attack</th>
-        <th>Defense</th>
-        <th>SP. Attack</th>
-        <th>SP. Defense</th>
-        <th>Speed</th>
-        <th>Pokemon Quote</th>
-        <th>Quote Author</th>
-        <% @pokemons.each do |poke| %>
-          <tr class="mb-5">
-            <th><%= link_to poke.name, pokemon_path(poke) %></th>
-            <td><%= image_tag format('%03d', poke.pokedexid.to_s   ) + ".png" %></td>
-            <td><%= poke.pokedexid %></td>
-            <td><%= poke.types.map(&:name).join(", ") %></td>
-            <td><%= poke.hp %></td>
-            <td><%= poke.attack %></td>
-            <td><%= poke.defense %></td>
-            <td><%= poke.spattack %></td>
-            <td><%= poke.spdefense %></td>
-            <td><%= poke.speed %></td>
-            <td><%= link_to poke.quote.quote, quote_path(poke.quote) %></td>
-            <td><%= poke.quote.author %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+
+  <% if @pokemons.present? %>
+  <div class="card-deck">
+    <div class="row">
+    <% @pokemons.each do |poke| %>
+
+        <div class="card" style="width: 19.6%;">
+
+          <div class="card-header">
+          <%= link_to poke.name, pokemon_path(poke) %>
+          </div>
+
+          <%= image_tag format('%03d', poke.pokedexid.to_s) + ".png" , alt: poke.name %>
+
+          <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Pokedex Id: <%= poke.pokedexid %></li>
+                <li class="list-group-item">Types: <%= poke.types.map(&:name).join(", ") %></li>
+                <li class="list-group-item">Hp: <%= poke.hp %></li>
+                <li class="list-group-item">Attack: <%= poke.attack %></li>
+                <li class="list-group-item">Defense: <%= poke.defense %></li>
+                <li class="list-group-item">Sp. Attack: <%= poke.spattack %></li>
+                <li class="list-group-item">Sp. Defense: <%= poke.spdefense %></li>
+                <li class="list-group-item">Speed: <%= poke.speed %></li>
+                <li class="list-group-item">Quote: <%= link_to poke.quote.quote, quote_path(poke.quote) %></li>
+              </ul>
+          </div>
+
+        </div>
+    <% end %>
+    <%= paginate @pokemons %>
+    </div>
   </div>
-<% else %>
-  <p>There are no pokemons containing the term(s) <%= params[:search] %>.</p>
-<% end %>
+
+
+  <% else %>
+    <p>There are no pokemons containing the term(s) <%= params[:search] %>.</p>
+  <% end %>
+</div>
+

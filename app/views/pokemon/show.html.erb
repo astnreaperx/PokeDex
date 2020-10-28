@@ -1,10 +1,28 @@
-<h1>Pokemon#show</h1>
-<p>Find me in app/views/pokemon/show.html.erb</p>
+<div class="container">
+  <div class="row">
+      <div class="card" style="width: 100%;">
 
+        <div class="card-header">
+        <%= @pokemon.name%>
+        </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @pokemon.name %>
-</p>
+        <%= image_tag format('%03d', @pokemon.pokedexid.to_s) + ".png", :size => "260x180" %>
 
-<%= link_to 'Back', pokemons_path %>
+        <div class="card-body">
+            <p class="card-text">Pokedex Id: <%= @pokemon.pokedexid %></p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Types: <%= @pokemon.types.map(&:name).join(", ") %></li>
+              <li class="list-group-item">Hp: <%= @pokemon.hp %></li>
+              <li class="list-group-item">Attack: <%= @pokemon.attack %></li>
+              <li class="list-group-item">Defense: <%= @pokemon.defense %></li>
+              <li class="list-group-item">Sp. Attack: <%= @pokemon.spattack %></li>
+              <li class="list-group-item">Sp. Defense: <%= @pokemon.spdefense %></li>
+              <li class="list-group-item">Speed: <%= @pokemon.speed %></li>
+              <li class="list-group-item">Quote: <%= link_to @pokemon.quote.quote, quote_path(@pokemon.quote) %></li>
+            </ul>
+        </div>
+
+      </div>
+  </div>
+  <%= link_to 'Back', pokemons_path, :class => "btn btn-primary" %>
+</div>
