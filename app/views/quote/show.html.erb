@@ -1,14 +1,18 @@
-<h1>Quote#show</h1>
-<p>Find me in app/views/quote/show.html.erb</p>
+<div class="container">
+  <div class="row">
+      <div class="card" style="width: 100%;">
+        <div class="card-header">
+          <%= @quote.author%>
+        </div>
 
-<p>
-  <strong>Quote:</strong>
-  <%= @quote.quote %>
-</p>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Type: <%= @quote.quote %></li>
+            </ul>
+        </div>
 
-<p>
-  <strong>Author:</strong>
-  <%= @quote.author %>
-</p>
+      </div>
+  </div>
+  <%= link_to 'Back', quotes_path , :class => "btn btn-primary" %>
+</div>
 
-<%= link_to 'Back', quotes_path %>
